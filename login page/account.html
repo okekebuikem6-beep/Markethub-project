@@ -1,0 +1,567 @@
+<?php
+// --- PHP BACKEND: Handle "Post an Ad" Form Submission ---
+$message = "";
+$messageType = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post_ad'])) {
+    // Sanitize inputs
+    $title = htmlspecialchars(trim($_POST['title']));
+    $category = htmlspecialchars(trim($_POST['category']));
+    $price = htmlspecialchars(trim($_POST['price']));
+    $location = htmlspecialchars(trim($_POST['location']));
+    $description = htmlspecialchars(trim($_POST['description']));
+
+    // Basic Validation
+    if (empty($title) || empty($category) || empty($price) || empty($location)) {
+        $message = "Please fill in all required fields.";
+        $messageType = "error";
+    } else {
+        // In a real application, you would connect to a database here (e.g., MySQL via PDO)
+        // Example: $stmt = $pdo->prepare("INSERT INTO ads (title, category, price, location, description) VALUES (?, ?, ?, ?, ?)");
+        
+        // For this demo, we simulate a successful submission
+        $message = "Success! Your ad for '<strong>$title</strong>' has been posted.";
+        $messageType = "success";
+        
+        // You could also handle image uploads here using $_FILES
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketHub - Buy and Sell Anything, Anywhere</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#10B981', // Tailwind emerald-500 equivalent
+                            dark: '#064E3B',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for better UX */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Alert Message (PHP) -->
+    <?php if ($message): ?>
+        <div id="alertMessage" class="fixed top-4 right-4 z-[100] p-4 rounded-lg shadow-lg text-white <?php echo $messageType === 'success' ? 'bg-green-500' : 'bg-red-500'; ?>">
+            <?php echo $message; ?>
+            <button onclick="document.getElementById('alertMessage').style.display='none'" class="ml-4 font-bold">&times;</button>
+        </div>
+    <?php endif; ?>
+
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="bg-brand-green text-white p-2 rounded-lg">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-900">Market<span class="text-brand-green">Hub</span></span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-brand-green border-b-2 border-brand-green font-medium pb-1">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-green font-medium flex items-center gap-1">
+                        Categories <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </a>
+                    <a href="#post-ad" class="text-gray-600 hover:text-brand-green font-medium">Post an Ad</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-green font-medium">Help</a>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-brand-green p-2">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition">Login</button>
+                    <button class="border border-brand-green text-brand-green px-4 py-2 rounded-lg font-medium hover:bg-green-50 transition">Register</button>
+                    <a href="#post-ad" class="bg-brand-green text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-plus"></i> Post an Ad
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-green focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-4">
+            <div class="px-4 pt-2 space-y-2">
+                <a href="#" class="block px-3 py-2 text-brand-green font-medium">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-600 font-medium">Categories</a>
+                <a href="#post-ad" class="block px-3 py-2 text-gray-600 font-medium">Post an Ad</a>
+                <a href="#" class="block px-3 py-2 text-gray-600 font-medium">Help</a>
+                <div class="border-t border-gray-100 mt-2 pt-4 flex flex-col gap-2">
+                    <button class="w-full text-center border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium">Login</button>
+                    <button class="w-full text-center border border-brand-green text-brand-green px-4 py-2 rounded-lg font-medium">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 h-[500px] flex items-center">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Marketplace" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="md:w-2/3 lg:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                    Buy and Sell <br>
+                    <span class="text-brand-green">Anything, Anywhere</span>
+                </h1>
+                <p class="text-gray-300 text-lg mb-8">
+                    Find great deals, post your products and connect with buyers and sellers in your area.
+                </p>
+
+                <!-- Search Bar -->
+                <div class="bg-white rounded-lg p-2 flex flex-col sm:flex-row shadow-lg">
+                    <div class="flex-grow flex items-center border-b sm:border-b-0 sm:border-r border-gray-200">
+                        <i class="fa-solid fa-magnifying-glass text-gray-400 pl-3 pr-2"></i>
+                        <input type="text" placeholder="Search for products, categories or location..." class="w-full py-3 px-2 outline-none text-gray-700">
+                    </div>
+                    <div class="sm:w-48 border-b sm:border-b-0 sm:border-r border-gray-200">
+                        <select class="w-full py-3 px-4 outline-none text-gray-700 bg-transparent cursor-pointer appearance-none">
+                            <option>All Categories</option>
+                            <option>Electronics</option>
+                            <option>Vehicles</option>
+                            <option>Fashion</option>
+                        </select>
+                    </div>
+                    <button class="bg-brand-green hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-md transition duration-200 mt-2 sm:mt-0">
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Floating Text (Right Side) -->
+            <div class="absolute right-10 bottom-20 hidden lg:block transform rotate-[-5deg]">
+                <p class="text-white text-3xl font-bold leading-tight drop-shadow-lg" style="font-family: 'Comic Sans MS', cursive, sans-serif;">
+                    Great Deals<br>Are Just a<br>Click Away!
+                </p>
+                <div class="w-24 h-1 bg-brand-green mt-2 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-green-100 text-brand-green flex items-center justify-center mb-3 group-hover:bg-brand-green group-hover:text-white transition">
+                    <i class="fa-solid fa-mobile-screen text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Electronics</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-car text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Vehicles</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-shirt text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Fashion</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-3 group-hover:bg-orange-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Property</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center mb-3 group-hover:bg-pink-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-mobile-button text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Phones & Tablets</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center mb-3 group-hover:bg-teal-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-couch text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700 text-center">Home & Furniture</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-3 group-hover:bg-yellow-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-briefcase text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700 text-center">Jobs & Services</span>
+            </div>
+            <!-- Category Item -->
+            <div class="bg-white rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:shadow-md transition border border-gray-100 group">
+                <div class="w-12 h-12 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center mb-3 group-hover:bg-gray-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-ellipsis text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">More Categories</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-20">
+        <div class="flex justify-between items-end mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Featured Listings</h2>
+            <a href="#" class="text-brand-green font-medium hover:text-green-700 flex items-center gap-1">
+                View All <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <!-- Product Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="iPhone" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">iPhone 13 128GB</h3>
+                    <p class="text-brand-green font-bold mb-2">₦350,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Lagos
+                        <span class="ml-auto bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">David Tech</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Toyota" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">Toyota Corolla 2016</h3>
+                    <p class="text-brand-green font-bold mb-2">₦4,500,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Abuja
+                        <span class="ml-auto bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">Blessed Motors</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sofa" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">Modern Sofa</h3>
+                    <p class="text-brand-green font-bold mb-2">₦120,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Port Harcourt
+                        <span class="ml-auto bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=13" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">Home Essentials</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sneakers" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">Men's Sneakers</h3>
+                    <p class="text-brand-green font-bold mb-2">₦60,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Lagos
+                        <span class="ml-auto bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=14" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">Fashion World</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Laptop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">HP Laptop</h3>
+                    <p class="text-brand-green font-bold mb-2">₦200,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Abuja
+                        <span class="ml-auto bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=15" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">Tech World</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition overflow-hidden border border-gray-100 group flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Motorcycle" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <button class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex-grow flex flex-col">
+                    <h3 class="font-semibold text-gray-800 text-sm mb-1 truncate">Honda CBR 250R</h3>
+                    <p class="text-brand-green font-bold mb-2">₦1,800,000</p>
+                    <div class="flex items-center text-xs text-gray-500 mb-3">
+                        <i class="fa-solid fa-location-dot mr-1"></i> Port Harcourt
+                        <span class="ml-auto bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="https://i.pravatar.cc/150?img=16" alt="User" class="w-5 h-5 rounded-full">
+                            <span class="text-[10px] text-gray-600">RideZone</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Ad Form Section (Hidden by default, triggered by "Post an Ad" links) -->
+    <section id="post-ad" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mb-20 hidden">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-10">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Post Your Ad</h2>
+                <button onclick="document.getElementById('post-ad').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <form action="" method="POST" class="space-y-6">
+                <input type="hidden" name="post_ad" value="1">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ad Title *</label>
+                    <input type="text" name="title" required placeholder="e.g., iPhone 13 Pro Max" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+                        <select name="category" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition bg-white">
+                            <option value="">Select Category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Vehicles">Vehicles</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Property">Property</option>
+                            <option value="Home & Furniture">Home & Furniture</option>
+                            <option value="Jobs & Services">Jobs & Services</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Price (₦) *</label>
+                        <input type="number" name="price" required placeholder="e.g., 350000" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Location *</label>
+                    <input type="text" name="location" required placeholder="e.g., Lagos, Nigeria" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                    <textarea name="description" rows="4" placeholder="Describe your item..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-green focus:border-brand-green outline-none transition"></textarea>
+                </div>
+
+                <!-- Image Upload (UI Only) -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Upload Images</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:bg-gray-50 transition cursor-pointer">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
+                        <p class="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</p>
+                        <input type="file" class="hidden" multiple accept="image/*">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+                    Post Ad Now
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="bg-brand-green text-white p-1.5 rounded-lg">
+                            <i class="fa-solid fa-bag-shopping text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold">Market<span class="text-brand-green">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Buy. Sell. Connect.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition"><i class="fa-brands fa-twitter text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green transition"><i class="fa-brands fa-youtube text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-green transition">Home</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition">Categories</a></li>
+                        <li><a href="#post-ad" class="hover:text-brand-green transition">Post an Ad</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition">Help & Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Us -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">About Us</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-green transition">About MarketHub</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Stay Connected</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get the latest products and deals.</p>
+                    <form class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="Enter your email address" class="bg-white text-gray-900 px-4 py-2 rounded-lg outline-none w-full text-sm">
+                        <button type="submit" class="bg-brand-green hover:bg-green-600 text-white font-medium px-4 py-2 rounded-lg transition text-sm whitespace-nowrap">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; <?php echo date("Y"); ?> MarketHub. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scroll for "Post an Ad" links
+        document.querySelectorAll('a[href="#post-ad"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.classList.remove('hidden');
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Auto-hide alert message after 5 seconds
+        const alertMessage = document.getElementById('alertMessage');
+        if (alertMessage) {
+            setTimeout(() => {
+                alertMessage.style.transition = 'opacity 0.5s ease';
+                alertMessage.style.opacity = '0';
+                setTimeout(() => alertMessage.style.display = 'none', 500);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
