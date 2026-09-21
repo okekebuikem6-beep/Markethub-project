@@ -12,18 +12,10 @@
 <link rel="stylesheet" href="main.css">
 
 <!-- Font Awesome -->
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
 <!-- Favicon -->
-<link
-    rel="shortcut icon"
-    href="/pictures/favicon.jpg"
-    type="image/x-icon"
->
-```
+<link rel="shortcut icon" href="/pictures/favicon.jpg" type="image/x-icon">
 
 </head>
 
@@ -38,7 +30,7 @@
 
         <!-- Logo -->
         <div>
-            <a href="#index">
+            <a href="index.html">
                 <img
                     class="logo"
                     src="/pictures/market-hub.png"
@@ -52,7 +44,7 @@
             <ul class="navlist">
 
                 <li>
-                    <a href="#index.html">
+                    <a href="index.html">
                         Home
                     </a>
                 </li>
@@ -66,13 +58,13 @@
                 -->
 
                 <li>
-                    <a href="#post-ad.html">
+                    <a href="post-ad.html">
                         Post an Ad
                     </a>
                 </li>
 
                 <li>
-                    <a href="#help">
+                    <a href="help.html">
                         Help
                     </a>
                 </li>
@@ -90,7 +82,7 @@
             </section>
 
             <section class="notify" id="account">
-                <a href="#accounts">
+                <a href="account.html">
                     <i class="fa-solid fa-circle-user"></i>
                 </a>
             </section>
@@ -114,7 +106,7 @@
             </section>
 
             <section class="notify" id="post-ad">
-                <a href="#post-ad.html">
+                <a href="post-ad.html">
                     Post an Ad
                 </a>
             </section>
@@ -895,76 +887,7 @@
 
 <!-- ==================== JAVASCRIPT ==================== -->
 
-<script>
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-        const openBtn =
-            document.getElementById("open-location-modal");
-
-        const modal =
-            document.getElementById("location-modal");
-
-        const searchInput =
-            document.getElementById("state-search");
-
-
-        // Open modal
-        openBtn.addEventListener("click", () => {
-
-            modal.classList.add("active");
-
-        });
-
-
-        // Close modal when clicking the dark overlay
-        modal.addEventListener("click", (e) => {
-
-            if (e.target === modal) {
-
-                modal.classList.remove("active");
-
-            }
-
-        });
-
-
-        // Real-time search filter
-        searchInput.addEventListener("input", (e) => {
-
-            const query =
-                e.target.value.toLowerCase().trim();
-
-            const cards =
-                document.querySelectorAll(".location-card");
-
-
-            cards.forEach((card) => {
-
-                const stateName =
-                    card
-                        .querySelector(".state-name")
-                        .textContent
-                        .toLowerCase();
-
-
-                if (stateName.includes(query)) {
-
-                    card.style.display = "flex";
-
-                } else {
-
-                    card.style.display = "none";
-
-                }
-
-            });
-
-        });
-
-    });
-
-</script>
+<script src="main.js"></script>
 
 
 </body>
