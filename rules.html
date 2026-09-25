@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Market-Hub</title>
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="main.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/pictures/favicon.jpg" type="image/x-icon">
+
+</head>
+<body>
+
+
+<!-- ==================== NAVBAR ==================== -->
+
+<header>
+
+    <nav class="nav-container">
+
+        <!-- Logo -->
+        <div>
+            <a href="index.html">
+                <img class="logo" src="/pictures/market-hub.png" alt="MarketHub Logo">
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="list-nav">
+            <ul class="navlist">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <!--
+                <li>
+                    <a href="#categories.html">
+                        Categories
+                    </a>
+                </li>
+                -->
+
+                <li>
+                    <a href="post-ad.html">
+                        Post an Ad
+                    </a>
+                </li>
+
+                <li>
+                    <a href="help.html">
+                        Help
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Notification / Account Icons -->
+        <div class="notification">
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-regular fa-bell"></i>
+                </a>
+            </section>
+
+            <section class="notify" id="account">
+                <a href="account.html">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-solid fa-bookmark"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-brands fa-adversal"></i>
+                </a>
+            </section>
+
+            <section class="notify" id="post-ad">
+                <a href="post-ad.html">
+                    Post an Ad
+                </a>
+            </section>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==================== SEARCH BAR ==================== --
+
+    <nav class="search-bar">
+
+        <!-- Search description --
+        <div class="what">
+            What are you looking for?
+        </div>
+
+        <section class="search">
+
+            <!-- ==================== LOCATION BUTTON ==================== --
+
+            <button
+                id="open-location-modal"
+                class="location-btn"
+            >
+                <i class="fa-solid fa-location-dot"></i>
+                Select Location
+            </button>
+
+
+            <!-- ==================== LOCATION MODAL ==================== --
+
+            <div
+                id="location-modal"
+                class="modal-overlay"
+            >
+
+                <div class="modal-content">
+
+                    <!-- Modal Header --
+                    <div class="modal-header">
+
+                        <div class="header-title">
+                            <span class="country-title">
+                                All Nigeria
+                            </span>
+                        </div>
+
+                        <!-- Location Search --
+                        <div class="search-box">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="text"
+                                id="state-search"
+                                placeholder="Find state, city or district......"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================== MODAL BODY ==================== --
+
+                    <div class="modal-body">
+
+                        <!-- ==================== FIRST COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- Popular --
+                            <div class="section-group">
+
+                                <div class="letter-label vertical">
+                                    POPULAR
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Abuja (FCT)
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Lagos State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Ogun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Oyo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Rivers State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- A States --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    A
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Abia State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Adamawa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Akwa Ibom State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Anambra State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== SECOND COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- B --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    B
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Bauchi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Bayelsa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Benue State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Borno State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- C --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    C
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Cross River State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Delta State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- D --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    D
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Delta State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- E --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    E
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ebonyi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Edo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ekiti State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Enugu State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== THIRD COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- F --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    F
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            FCT Abuja
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- G --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    G
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Gombe State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- I --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    I
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Imo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- K --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    K
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kaduna State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kano State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Katsina State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kebbi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kogi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kwara State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== FOURTH COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- L --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    L
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Lagos State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- N --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    N
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Nasarawa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Niger State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- O --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    O
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ogun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ondo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Osun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Oyo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== FIFTH COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- P --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    P
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Plateau State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- R --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    R
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Rivers State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- S --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    S
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Sokoto State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- T --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    T
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Taraba State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Y --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    Y
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Yobe State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Z --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    Z
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Zamfara State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================== MAIN SEARCH INPUT ==================== --
+
+            <form class="center-form">
+
+                <div class="search-box">
+
+                    <input type="text" placeholder="I am looking for...">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </nav>
+
+</header>
+
+
+<!-- ================ MAIN ================== -->
+
+<main>
+    <section class="terms-section">
+
+    <div class="terms-container">
+
+        <h1>Terms of Use</h1>
+
+        <h2>1. Acceptance of the Terms</h2>
+
+        <ol>
+            <li>
+                These Terms of Use (the “Terms”) constitute a binding and
+                enforceable legal contract between <strong>Markethub Online
+                Marketplace Nigeria Limited</strong>, its affiliated companies
+                (together, the “Administrator”, “we”, “us”) and you.
+                Please read these Terms carefully.
+            </li>
+
+            <li>
+                Your access and use of the <strong>Markethub.ng</strong>
+                website and mobile applications, as well as any service,
+                content, and data available via them (together, the
+                “Service” or the “Platform”) are governed by these Terms.
+            </li>
+
+            <li>
+                If you do not agree with any part of these Terms, or if you
+                are not eligible or authorized to be bound by the Terms,
+                then do not access or use the Service.
+            </li>
+
+            <li>
+                Please also review our
+                <a href="privacy.html">Privacy Policy</a>.
+                The terms of the Privacy Policy and other supplemental terms,
+                rules, policies, or documents that may be posted on the
+                Platform from time to time are hereby expressly incorporated
+                herein by reference.
+            </li>
+        </ol>
+
+
+        <h2>2. Important Disclaimers</h2>
+
+        <ol>
+            <li>
+                ALL SERVICES RENDERED BY THE ADMINISTRATOR ARE RENDERED
+                “AS IS”, “AS AVAILABLE” AND “WITH ALL FAULTS”, AND THE
+                ADMINISTRATOR DISCLAIMS ALL WARRANTIES, EXPRESSED OR IMPLIED,
+                INCLUDING WITHOUT LIMITATION ANY GUARANTEES REGARDING
+                CONDITION, QUALITY, PERFORMANCE, ACCURACY, RELIABILITY,
+                COMMERCIAL VALUE AND SUITABILITY FOR SPECIFIC PURPOSES.
+            </li>
+
+            <li>
+                ADMINISTRATOR HAS NO CONTROL OVER AND DOES NOT GUARANTEE
+                THE EXISTENCE, QUALITY, SAFETY OR LEGALITY OF GOODS AND
+                SERVICES PUBLISHED BY USERS ON THE PLATFORM.
+            </li>
+
+            <li>
+                YOU ARE ENCOURAGED TO CHECK THE GOODS BEFORE PAYMENT AND
+                TO REQUEST THE SELLER TO PROVIDE DOCUMENTS CONFIRMING
+                COMPLIANCE OF THE GOODS WITH APPLICABLE REQUIREMENTS OF
+                LAWS, REGULATIONS, RULES, GUIDELINES AND STANDARDS.
+            </li>
+
+            <li>
+                YOU ACKNOWLEDGE THAT YOU ARE SOLELY RESPONSIBLE FOR YOUR
+                SAFETY. YOU SHOULD MEET WITH OTHER INDIVIDUALS FOR
+                COMPLETION OF A TRANSACTION ONLY IN SAFE PUBLIC PLACES
+                DURING DAYLIGHT HOURS.
+            </li>
+        </ol>
+
+
+        <h2>3. Account Registration</h2>
+
+        <ol>
+            <li>
+                In order to use certain features of the Service you may
+                need to register an account on the Platform (the “Account”).
+            </li>
+
+            <li>
+                You may create an Account as an individual or as an
+                authorized representative of a company.
+            </li>
+
+            <li>
+                You can register only one Account.
+            </li>
+
+            <li>
+                You are solely responsible for safeguarding and maintaining
+                the confidentiality of your Account access details.
+            </li>
+
+            <li>
+                You represent and warrant that you have reached the age
+                of majority or are accessing the Service under the
+                supervision of a parent or legal guardian.
+            </li>
+        </ol>
+
+
+        <h2>4. Service</h2>
+
+        <ol>
+            <li>
+                The Platform is an online service that allows users to
+                create and publish announcements, view announcements
+                published by other users and communicate with other users.
+            </li>
+
+            <li>
+                The Administrator is not an importer, manufacturer,
+                distributor or seller of any item posted by users.
+            </li>
+
+            <li>
+                Users shall be solely responsible for collecting and
+                remitting any applicable taxes resulting from the sale
+                of their goods or services.
+            </li>
+
+            <li>
+                The Administrator reserves the right to delete or block
+                access to announcements that violate these Terms or
+                applicable laws.
+            </li>
+        </ol>
+
+
+        <h2>5. Posting of Announcements by Users</h2>
+
+        <ol>
+            <li>
+                A user shall provide the Administrator with documents
+                confirming the legitimacy of posting announcements when
+                requested.
+            </li>
+
+            <li>
+                Users shall provide precise and complete information
+                about goods and services posted on the Platform.
+            </li>
+
+            <li>
+                The terms and conditions of sale developed by users
+                shall not interfere with these Terms or applicable laws.
+            </li>
+
+            <li>
+                Prices of goods or services shall be accurate.
+            </li>
+        </ol>
+
+
+        <h2>6. Fees</h2>
+
+        <ol>
+            <li>
+                The Platform is generally free; however, it may contain
+                payable services.
+            </li>
+
+            <li>
+                Fees for payable services and accepted payment methods
+                will be disclosed on the Platform.
+            </li>
+
+            <li>
+                We reserve the right to change fees and acceptable
+                payment methods from time to time.
+            </li>
+        </ol>
+
+
+        <h2>7. User Representations and Warranties</h2>
+
+        <p>By using the Service, you represent and warrant that:</p>
+
+        <ol>
+            <li>You have the legal capacity to agree to these Terms.</li>
+            <li>You are above 18 years of age.</li>
+            <li>You have provided true and accurate information.</li>
+            <li>You will maintain accurate information in your Account.</li>
+            <li>You will not use the Service for illegal purposes.</li>
+            <li>You will not post false or misleading information.</li>
+            <li>You will not infringe the rights of other persons.</li>
+            <li>You will not distribute malware or harmful software.</li>
+            <li>You have legal title to items offered for sale.</li>
+        </ol>
+
+
+        <h2>8. Indemnity</h2>
+
+        <p>
+            You agree to indemnify and hold the Administrator, its successors,
+            subsidiaries, affiliates, related companies, suppliers, licensors,
+            partners, officers, directors, employees, agents and representatives
+            harmless from any claim or demand arising out of your use of the
+            Platform, your User Content, your violation of these Terms or
+            applicable law, or any transaction entered into through the Platform.
+        </p>
+
+
+        <h2>9. Limitation of Liability</h2>
+
+        <ol>
+            <li>
+                In no event shall the Administrator or its affiliates be
+                liable for any lost profit or indirect, consequential,
+                exemplary, incidental, special or punitive damages arising
+                from these Terms or your use of the Service.
+            </li>
+
+            <li>
+                The aggregate liability of the Administrator for claims
+                arising from the use of the Service shall be limited to the
+                lesser of the amounts paid to us during the six-month period
+                prior to the cause of action or NGN 37,000.
+            </li>
+        </ol>
+
+
+        <h2>10. Intellectual Property Rights</h2>
+
+        <ol>
+            <li>
+                Information you submit as part of your registration and
+                User Content remain your intellectual property.
+            </li>
+
+            <li>
+                By listing products on our Platform, you grant Markethub
+                certain rights to use publicly available listing content
+                for promotional and marketing purposes.
+            </li>
+
+            <li>
+                Materials on the Platform, including text, software,
+                graphics, photos, sounds, music, videos and logos,
+                belong to or are licensed by the Administrator.
+            </li>
+        </ol>
+
+
+        <h2>11. Governing Law and Jurisdiction</h2>
+
+        <ol>
+            <li>
+                These Terms shall be governed in accordance with the
+                laws of the Republic of Nigeria.
+            </li>
+
+            <li>
+                Any dispute arising out of or in connection with these
+                Terms shall be referred to and finally resolved by
+                arbitration under applicable Nigerian law.
+            </li>
+        </ol>
+
+
+        <h2>12. Miscellaneous Provisions</h2>
+
+        <ol>
+            <li>
+                If any provision of these Terms is held to be invalid,
+                the remaining provisions shall remain valid and enforceable.
+            </li>
+
+            <li>
+                We may transfer or assign our rights and obligations
+                under these Terms.
+            </li>
+
+            <li>
+                Failure to take action against a breach does not prevent
+                us from exercising our rights in the future.
+            </li>
+        </ol>
+
+
+        <h2>13. Markethub Contest Rules</h2>
+
+        <p>
+            According to the applicable provisions of the tax legislation
+            of Nigeria, the Company will apply withholding tax to your award.
+            You may therefore receive your award less the applicable
+            withholding tax.
+        </p>
+
+
+        <h2>14. Contact</h2>
+
+        <p>
+            If you want to send any notice under these Terms or have any
+            questions regarding the Service, you may contact us at:
+        </p>
+
+        <p>
+            <a id="email" href="mailto:support@markethub.ng">
+                support@markethub.ng
+            </a>
+        </p>
+
+        <p class="last-updated">
+            <strong>Last updated: 25 September 2026</strong>
+        </p>
+
+    </div>
+
+</section>
+</main>
+
+
+<!-- ================= FOOTER ================ -->
+
+<div class="footer-img" style=" height: 95px; background-color: #152b3e; mask-image: url('https://assets.jijistatic.net/static/svg/footer/footer-nigeria-new.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; "></div>
+
+
+<!-- Footer -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- About MarketHub -->
+    <div class="footer-column">
+      <h4>About MarketHub</h4>
+
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="rules.html">Terms & Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="safety.html">Safety Policy</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+
+    <!-- Support -->
+    <div class="footer-column">
+      <h4>Support</h4>
+
+      <a href="help.html">Help & Support</a>
+      <a href="safety.html">Safety Tips</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+
+    <!-- Our Apps -->
+    <div class="footer-column">
+      <h4>Our Apps</h4>
+
+      <a href="https://www.apple.com/app-store/" class="app-button">
+        <i class="fa-brands fa-apple"></i>
+
+        <span>
+          <small>Download on the</small>
+          App Store
+        </span>
+      </a>
+
+      <a href="https://play.google.com/store/apps?hl=en" class="app-button">
+        <i class="fa-brands fa-google-play"></i>
+
+        <span>
+          <small>GET IT ON</small>
+          Google Play
+        </span>
+      </a>
+    </div>
+
+
+    <!-- Our Resources -->
+    <div class="footer-column">
+      <h4>Our Resources</h4>
+
+      <a href="https://web.facebook.com/?_rdc=1&_rdr#">MarketHub on Facebook</a>
+      <a href="https://www.instagram.com/mazitundeednut/">Our Instagram</a>
+      <a href="https://www.youtube.com/">Our YouTube</a>
+      <a href="https://x.com/home">Our X</a>
+    </div>
+
+
+    <!-- Hot Links -->
+    <div class="footer-column">
+      <h4>Hot Links</h4>
+
+      <a href="#">Categories</a>
+      <a href="post-ad.html">Post an Ad</a>
+      <a href="#">Popular Products</a>
+      <a href="#">MarketHub Blog</a>
+    </div>
+
+  </div>
+
+
+  <!-- MarketHub Brand -->
+  <div class="footer-brand">
+
+    <a href="index.html" class="brand">
+
+      <span class="brand-bag">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </span>
+
+      <span class="brand-name">
+        Market<span>Hub</span>
+      </span>
+
+    </a>
+
+    <p>Buy. Sell. Connect.</p>
+
+  </div>
+
+
+  <!-- Social Media -->
+  <div class="socials">
+
+    <a href="https://web.facebook.com/?_rdc=1&_rdr#">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="https://x.com/home">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+
+    <a href="https://www.instagram.com/mazitundeednut/">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://www.youtube.com/">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+
+  </div>
+
+
+  <!-- Country Flags -->
+  <div class="countries">
+
+    <img src="https://flagcdn.com/w40/ng.png" alt="Nigeria">
+    <img src="https://flagcdn.com/w40/gh.png" alt="Ghana">
+    <img src="https://flagcdn.com/w40/ke.png" alt="Kenya">
+    <img src="https://flagcdn.com/w40/ug.png" alt="Uganda">
+    <img src="https://flagcdn.com/w40/za.png" alt="South Africa">
+    <img src="https://flagcdn.com/w40/tz.png" alt="Tanzania">
+    <img src="https://flagcdn.com/w40/rw.png" alt="Rwanda">
+    <img src="https://flagcdn.com/w40/sn.png" alt="Senegal">
+    <img src="https://flagcdn.com/w40/et.png" alt="Ethiopia">
+    <img src="https://flagcdn.com/w40/eg.png" alt="Egypt">
+
+  </div>
+
+
+  <!-- Copyright -->
+  <p class="copyright">
+    © 2026 MarketHub. All rights reserved.
+  </p>
+
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+
+<script src="main.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market-Hub</title>
+
+    <!-- Main CSS -->
+    <!-- <link rel="stylesheet" href="main.css"> -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/pictures/favicon.jpg" type="image/x-icon">
+</head>
+<body>
+
+    <style>
+        /* ==========================================================================
+   Header & Navbar Section
+   ========================================================================== */
+
+header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 20px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+  height: 48px; 
+  width: auto;  
+  display: block;
+  object-fit: contain;
+}
+
+/* Central Navigation Links */
+.list-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navlist {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.navlist a {
+  text-decoration: none;
+  color: #2b2f38;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  transition: color 0.2s ease;
+  font-style: oblique;
+  margin-bottom: 10px;
+}
+
+.navlist a:hover {
+  color: #007bff;
+  text-decoration: underline 5px solid;
+  font-style: italic;
+}
+
+/* Notification Icons */
+.notification {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.notify a {
+  color: #2b2f38;
+  font-size: 21px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.notify a:hover {
+  color: #007bff;
+  font-weight: 900;
+  text-decoration: underline 4px solid;
+}
+
+/* Post an Ad */
+#post-ad a {
+  background-color: #0056b3;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#post-ad a:hover {
+  background-color: #053970;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Search Bar Section
+   ========================================================================== */
+
+.search-bar {
+  padding: 15px 0 25px;
+  border-top: 1px solid #ebebeb;
+}
+
+.search-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.what {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b2f38;
+  font-family: sans-serif;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Location Selector Button */
+.location-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  color: #2b2f38;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.location-btn i {
+  color: #0056b3;
+  font-size: 16px;
+}
+
+.location-btn:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Main Form & Input */
+.center-form {
+  flex: 1;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-box:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.search-box input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #2b2f38;
+  background: transparent;
+}
+
+.search-submit-btn {
+  height: 100%;
+  padding: 0 24px;
+  background-color: #0056b3;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-submit-btn:hover {
+  background-color: #053970;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Tablets / Medium Displays (Under 992px) */
+@media (max-width: 992px) {
+  header {
+    padding: 0 15px;
+  }
+
+  .nav-container {
+    height: auto;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .list-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    border-top: 1px dashed #e0e0e0;
+    padding-top: 10px;
+  }
+
+  .navlist {
+    gap: 20px;
+  }
+
+  .navlist a {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile Devices (Under 600px) */
+@media (max-width: 600px) {
+  .logo {
+    height: 38px;
+  }
+
+  .notification {
+    gap: 12px;
+  }
+
+  .notify a {
+    font-size: 18px;
+  }
+
+  #post-ad a {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .what {
+    font-size: 17px;
+  }
+
+  .search-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .location-btn {
+    width: 100%;
+    justify-content: center;
+    height: 42px;
+  }
+
+  .center-form {
+    width: 100%;
+  }
+
+  .search-box {
+    height: 42px;
+  }
+
+  .search-submit-btn {
+    padding: 0 16px;
+  }
+}
+
+/* Modal Backdrop Overlay */
+.modal-overlay {
+  display: none; /* Controlled by JS */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Modal Content Container */
+.modal-content {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  border-radius: 8px;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Modal Title bar & Close Button */
+.modal-header .header-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px 5px;
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+  color: #2b2f38;
+}
+    </style>
+
+<header>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="nav-container">
+
+        <!-- Logo -->
+        <div class="logo-wrapper">
+            <a href="index.html">
+                <img class="logo" src="/pictures/market-hub.png" alt="MarketHub Logo">
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="list-nav">
+            <ul class="navlist">
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="categories.html">Categories</a></li> -->
+                <li><a href="post-ad.html">Post an Ad</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </div>
+
+        <!-- Action / Account Icons -->
+        <div class="notification">
+            <a href="#" class="notify-icon" title="Notifications">
+                <i class="fa-regular fa-bell"></i>
+            </a>
+            <a href="account.html" class="notify-icon" id="account" title="Account">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
+            <a href="#" class="notify-icon" title="Messages">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="#" class="notify-icon" title="Saved Items">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+            <a href="post-ad.html" class="btn-post-ad" id="post-ad">
+                Post an Ad
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- ==================== SEARCH BAR ==================== -->
+    <nav class="search-bar">
+
+        <div class="what">
+            What are you looking for?
+        </div>
+
+        <div class="search-wrapper">
+
+            <!-- Location Trigger Button -->
+            <button id="open-location-modal" class="location-btn" type="button">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Select Location</span>
+            </button>
+
+            <!-- Main Search Input Form -->
+            <form class="center-form">
+                <div class="search-box">
+                    <input type="text" placeholder="I am looking for..." aria-label="Search items">
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- ==================== LOCATION MODAL ==================== -->
+<div id="location-modal" class="modal-overlay">
+
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <div class="header-title">
+                <span class="country-title">All Nigeria</span>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="state-search" placeholder="Find state, city or district...">
+                 <button id="close-location-modal" class="close-modal-btn" type="button" aria-label="Close modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+            </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+
+            <!-- Column 1 -->
+            <div class="location-column">
+                <div class="section-group">
+                    <div class="letter-label vertical">POPULAR</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Abuja (FCT)</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Lagos State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Ogun State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Oyo State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Rivers State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">A</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Abia State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Adamawa State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Akwa Ibom State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Anambra State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="location-column">
+                <div class="section-group">
+                    <div class="letter-label">B</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Bauchi State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Bayelsa State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Benue State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Borno State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">C</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Cross River State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">D</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Delta State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">E</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Ebonyi State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Edo State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Ekiti State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Enugu State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="location-column">
+                <div class="section-group">
+                    <div class="letter-label">F</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">FCT Abuja</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">G</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Gombe State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">I</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Imo State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">K</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Kaduna State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Kano State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Katsina State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Kebbi State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Kogi State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Kwara State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="location-column">
+                <div class="section-group">
+                    <div class="letter-label">L</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Lagos State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">N</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Nasarawa State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Niger State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">O</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Ogun State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Ondo State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Osun State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#" class="location-card"><strong class="state-name">Oyo State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 5 -->
+            <div class="location-column">
+                <div class="section-group">
+                    <div class="letter-label">P</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Plateau State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">R</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Rivers State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">S</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Sokoto State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">T</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Taraba State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">Y</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Yobe State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="section-group">
+                    <div class="letter-label">Z</div>
+                    <div class="list-cards">
+                        <a href="#" class="location-card"><strong class="state-name">Zamfara State</strong><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Inside #location-modal .modal-header, add this close button: -->
+<!-- <div class="modal-header">
+    <div class="header-title">
+        <span class="country-title">All Nigeria</span>
+       
+    </div> -->
+
+    <!-- <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="state-search" placeholder="Find state, city or district...">
+    </div> -->
+</div>
+
+<!-- Include JS script at the end of body -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    /* ==========================================================================
+       1. DOM Elements
+       ========================================================================== */
+    const locationBtn = document.getElementById('open-location-modal');
+    const locationModal = document.getElementById('location-modal');
+    const closeModalBtn = document.getElementById('close-location-modal');
+    const stateSearchInput = document.getElementById('state-search');
+    const locationCards = document.querySelectorAll('.location-card');
+    const locationBtnText = locationBtn ? locationBtn.querySelector('span') : null;
+    const searchForm = document.querySelector('.center-form');
+
+    /* ==========================================================================
+       2. Modal Toggle Functions
+       ========================================================================== */
+    const openModal = () => {
+        if (locationModal) {
+            locationModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Lock background scrolling
+            if (stateSearchInput) stateSearchInput.focus();
+        }
+    };
+
+    const closeModal = () => {
+        if (locationModal) {
+            locationModal.style.display = 'none';
+            document.body.style.overflow = ''; // Restore background scrolling
+            resetSearchFilter();
+        }
+    };
+
+    // Open Modal
+    if (locationBtn) {
+        locationBtn.addEventListener('click', openModal);
+    }
+
+    // Close Modal via 'X' Button
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    // Close Modal via Backdrop Click
+    window.addEventListener('click', (event) => {
+        if (event.target === locationModal) {
+            closeModal();
+        }
+    });
+
+    // Close Modal via 'Escape' Key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && locationModal && locationModal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    /* ==========================================================================
+       3. Select Location Functionality
+       ========================================================================== */
+    locationCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const selectedState = card.querySelector('.state-name')?.textContent.trim();
+
+            if (selectedState && locationBtnText) {
+                // Update trigger button label
+                locationBtnText.textContent = selectedState;
+
+                // Save selected location to localStorage
+                localStorage.setItem('selectedLocation', selectedState);
+            }
+
+            closeModal();
+        });
+    });
+
+    // Retrieve saved location on page load
+    const savedLocation = localStorage.getItem('selectedLocation');
+    if (savedLocation && locationBtnText) {
+        locationBtnText.textContent = savedLocation;
+    }
+
+    /* ==========================================================================
+       4. State Search & Filter Logic
+       ========================================================================== */
+    const filterStates = () => {
+        const query = stateSearchInput.value.toLowerCase().trim();
+
+        locationCards.forEach(card => {
+            const stateName = card.querySelector('.state-name')?.textContent.toLowerCase();
+
+            if (stateName && stateName.includes(query)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Hide empty sections/alphabet letters dynamically
+        const sectionGroups = document.querySelectorAll('.section-group');
+        sectionGroups.forEach(group => {
+            const visibleCards = group.querySelectorAll('.location-card[style*="display: flex"], .location-card:not([style*="display: none"])');
+            if (visibleCards.length === 0 && query !== '') {
+                group.style.display = 'none';
+            } else {
+                group.style.display = 'block';
+            }
+        });
+    };
+
+    const resetSearchFilter = () => {
+        if (stateSearchInput) {
+            stateSearchInput.value = '';
+            filterStates();
+        }
+    };
+
+    if (stateSearchInput) {
+        stateSearchInput.addEventListener('input', filterStates);
+    }
+
+    /* ==========================================================================
+       5. Search Form Submission
+       ========================================================================== */
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = searchForm.querySelector('input[type="text"]').value.trim();
+            const location = locationBtnText ? locationBtnText.textContent : 'All Nigeria';
+
+            if (query) {
+                // Redirect or execute search operation
+                console.log(`Searching for "${query}" in ${location}`);
+                // Example redirect: window.location.href = `search.html?query=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}`;
+            }
+        });
+    }
+
+});
+</script>
+</body>

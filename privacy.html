@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Market-Hub</title>
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="main.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/pictures/favicon.jpg" type="image/x-icon">
+
+</head>
+<body>
+
+
+<!-- ==================== NAVBAR ==================== -->
+
+<header>
+
+    <nav class="nav-container">
+
+        <!-- Logo -->
+        <div>
+            <a href="index.html">
+                <img class="logo" src="/pictures/market-hub.png" alt="MarketHub Logo">
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="list-nav">
+            <ul class="navlist">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <!--
+                <li>
+                    <a href="#categories.html">
+                        Categories
+                    </a>
+                </li>
+                -->
+
+                <li>
+                    <a href="post-ad.html">
+                        Post an Ad
+                    </a>
+                </li>
+
+                <li>
+                    <a href="help.html">
+                        Help
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Notification / Account Icons -->
+        <div class="notification">
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-regular fa-bell"></i>
+                </a>
+            </section>
+
+            <section class="notify" id="account">
+                <a href="account.html">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-solid fa-bookmark"></i>
+                </a>
+            </section>
+
+            <section class="notify">
+                <a href="#">
+                    <i class="fa-brands fa-adversal"></i>
+                </a>
+            </section>
+
+            <section class="notify" id="post-ad">
+                <a href="post-ad.html">
+                    Post an Ad
+                </a>
+            </section>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==================== SEARCH BAR ==================== --
+
+    <nav class="search-bar">
+
+        <!-- Search description --
+        <div class="what">
+            What are you looking for?
+        </div>
+
+        <section class="search">
+
+            <!-- ==================== LOCATION BUTTON ==================== --
+
+            <button id="open-location-modal" class="location-btn">
+                <i class="fa-solid fa-location-dot"></i>
+                Select Location
+            </button>
+
+
+            <!-- ==================== LOCATION MODAL ==================== --
+
+            <div id="location-modal" class="modal-overlay">
+
+                <div class="modal-content">
+
+                    <!-- Modal Header --
+                    <div class="modal-header">
+
+                        <div class="header-title">
+                            <span class="country-title">
+                                All Nigeria
+                            </span>
+                        </div>
+
+                        <!-- Location Search --
+                        <div class="search-box">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="text"
+                                id="state-search"
+                                placeholder="Find state, city or district......"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==================== MODAL BODY ==================== --
+
+                    <div class="modal-body">
+
+                        <!-- ==================== FIRST COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- Popular --
+                            <div class="section-group">
+
+                                <div class="letter-label vertical">
+                                    POPULAR
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Abuja (FCT)
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Lagos State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Ogun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Oyo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Rivers State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- A States --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    A
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Abia State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Adamawa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Akwa Ibom State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                    <a href="#" class="location-card">
+                                        <strong class="state-name">
+                                            Anambra State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== SECOND COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- B --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    B
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Bauchi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Bayelsa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Benue State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Borno State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- C --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    C
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Cross River State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Delta State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- D --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    D
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Delta State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- E --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    E
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ebonyi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Edo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ekiti State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Enugu State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== THIRD COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- F --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    F
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            FCT Abuja
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- G --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    G
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Gombe State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- I --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    I
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Imo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- K --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    K
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kaduna State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kano State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Katsina State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kebbi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kogi State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Kwara State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== FOURTH COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- L --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    L
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Lagos State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- N --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    N
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Nasarawa State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Niger State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- O --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    O
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ogun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Ondo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Osun State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Oyo State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ==================== FIFTH COLUMN ==================== --
+
+                        <div class="location-column">
+
+                            <!-- P --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    P
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Plateau State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- R --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    R
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Rivers State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- S --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    S
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Sokoto State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- T --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    T
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Taraba State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Y --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    Y
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Yobe State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Z --
+                            <div class="section-group">
+
+                                <div class="letter-label">
+                                    Z
+                                </div>
+
+                                <div class="list-cards">
+
+                                    <a href="#" class="location-card">
+
+                                        <strong class="state-name">
+                                            Zamfara State
+                                        </strong>
+
+                                        <i class="fa-solid fa-chevron-right"></i>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================== MAIN SEARCH INPUT ==================== --
+
+            <form class="center-form">
+
+                <div class="search-box">
+
+                    <input type="text" placeholder="I am looking for...">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </nav>
+
+</header>
+
+
+<!-- ================ MAIN ================== -->
+
+<main>
+     <!-- =========================
+         PRIVACY POLICY
+    ========================== -->
+
+    <main class="privacy-section">
+
+        <div class="privacy-container">
+
+            <h1>Privacy Policy</h1>
+
+            <p>
+                This Privacy Policy explains what personal data may be collected
+                when you use the MarketHub website and applications
+                ("MarketHub") and the services provided through them
+                (together, the "Service"), how such personal data may be used
+                and shared.
+            </p>
+
+            <p class="privacy-notice">
+                BY USING THE SERVICE, YOU CONFIRM THAT YOU HAVE READ,
+                UNDERSTAND AND AGREE TO THIS PRIVACY POLICY.
+            </p>
+
+            <p>
+                "Process", in respect of personal data, includes collecting,
+                storing, using and disclosing personal data to others where
+                permitted by applicable law.
+            </p>
+
+            <p>
+                This Privacy Policy is intended to operate in accordance with
+                applicable Nigerian data protection laws and regulations.
+            </p>
+
+
+            <!-- TABLE OF CONTENTS -->
+
+            <div class="privacy-contents">
+
+                <h2>TABLE OF CONTENTS</h2>
+
+                <ol>
+                    <li><a href="#section1">1. PERSONAL DATA CONTROLLER</a></li>
+                    <li>
+                        <a href="#section2">
+                            2. CATEGORIES OF PERSONAL DATA WE COLLECT
+                        </a>
+
+                        <ol>
+                            <li><a href="#section2-1">2.1. Data you give us</a></li>
+                            <li>
+                                <a href="#section2-2">
+                                    2.2. Data provided by third parties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#section2-3">
+                                    2.3. Data we collect automatically
+                                </a>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <a href="#section3">
+                            3. DATA PROTECTION PRINCIPLES
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section4">
+                            4. FOR WHAT PURPOSES WE PROCESS YOUR PERSONAL DATA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section5">
+                            5. UNDER WHAT LEGAL BASES WE PROCESS YOUR PERSONAL DATA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section6">
+                            6. WITH WHOM WE SHARE YOUR PERSONAL DATA
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section7">
+                            7. AVAILABLE REMEDIES
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section8">
+                            8. NO LIMITATION CLAUSE
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section9">
+                            9. HOW YOU CAN EXERCISE YOUR PRIVACY RIGHTS
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section10">
+                            10. AGE LIMITATION
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section11">
+                            11. INTERNATIONAL DATA TRANSFERS
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section12">
+                            12. CHANGES TO THIS PRIVACY POLICY
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section13">
+                            13. DATA RETENTION
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#section14">
+                            14. CONTACT US
+                        </a>
+                    </li>
+
+                </ol>
+
+            </div>
+
+
+            <!-- 1 -->
+
+            <section id="section1">
+
+                <h2>1. PERSONAL DATA CONTROLLER</h2>
+
+                <p>
+                    MarketHub is responsible for determining how personal data
+                    collected through the Service is processed, subject to
+                    applicable data protection laws.
+                </p>
+
+                <p>
+                    Depending on the services you use, certain third-party
+                    service providers may independently process personal data
+                    in accordance with their own privacy policies and
+                    applicable legal requirements.
+                </p>
+
+            </section>
+
+
+            <!-- 2 -->
+
+            <section id="section2">
+
+                <h2>2. CATEGORIES OF PERSONAL DATA WE COLLECT</h2>
+
+                <p>
+                    We may collect information that you voluntarily provide to
+                    us and information that is automatically collected when you
+                    use the Service.
+                </p>
+
+
+                <h3 id="section2-1">
+                    2.1. Data you give us
+                </h3>
+
+                <h4>📝 Registration Information</h4>
+
+                <p>
+                    When you register for or use the Service, we may ask you
+                    to provide information such as your name, telephone number,
+                    email address and other information required to create and
+                    maintain your account.
+                </p>
+
+                <h4>👤 Public Profile Information</h4>
+
+                <p>
+                    When you publish an advertisement, you may choose to provide
+                    additional information about yourself, including photographs,
+                    descriptions and other information included in your listing.
+                </p>
+
+                <p>
+                    Please carefully consider the information you choose to make
+                    publicly available through your advertisements.
+                </p>
+
+
+                <h3 id="section2-2">
+                    2.2. Data provided by third parties
+                </h3>
+
+                <h4>🔐 Social Login Services</h4>
+
+                <p>
+                    If you choose to sign in using a third-party service such
+                    as Google, Apple or another supported authentication
+                    provider, we may receive information made available to us
+                    by that provider.
+                </p>
+
+                <p>
+                    The information received may include your name, email
+                    address, profile image or an account identifier.
+                </p>
+
+
+                <h4>👥 Referrals</h4>
+
+                <p>
+                    If another person invites you to use MarketHub, that person
+                    may provide us with information necessary to send you the
+                    invitation.
+                </p>
+
+
+                <h3 id="section2-3">
+                    2.3. Data we collect automatically
+                </h3>
+
+                <h4>🌐 Device and Location Data</h4>
+
+                <p>
+                    We may collect information about the device you use to
+                    access the Service, including your IP address, browser,
+                    operating system, device type, language settings and
+                    related technical information.
+                </p>
+
+                <h4>📊 Usage Data</h4>
+
+                <p>
+                    We may record information about how you interact with the
+                    Service, including the pages, features and advertisements
+                    you view and how frequently you use the Service.
+                </p>
+
+                <h4>💳 Transaction Data</h4>
+
+                <p>
+                    When you make payments through the Service, payment
+                    information may be processed by third-party payment
+                    providers. MarketHub may receive information about the
+                    transaction, such as the date, amount and payment method.
+                </p>
+
+                <h4>🍪 Cookies and Similar Technologies</h4>
+
+                <p>
+                    MarketHub may use cookies and similar technologies to
+                    improve the functionality, security and performance of the
+                    Service.
+                </p>
+
+            </section>
+
+
+            <!-- 3 -->
+
+            <section id="section3">
+
+                <h2>3. DATA PROTECTION PRINCIPLES</h2>
+
+                <p>
+                    In handling personal data, MarketHub aims to ensure that
+                    personal data is:
+                </p>
+
+                <ul>
+                    <li>
+                        processed for specific, lawful and legitimate purposes;
+                    </li>
+
+                    <li>
+                        adequate, relevant and reasonably accurate;
+                    </li>
+
+                    <li>
+                        retained only for as long as reasonably necessary; and
+                    </li>
+
+                    <li>
+                        protected against reasonably foreseeable security
+                        threats and unauthorized access.
+                    </li>
+                </ul>
+
+            </section>
+
+
+            <!-- 4 -->
+
+            <section id="section4">
+
+                <h2>
+                    4. FOR WHAT PURPOSES WE PROCESS YOUR PERSONAL DATA
+                </h2>
+
+                <p>
+                    We may process personal data for purposes including:
+                </p>
+
+                <h3>4.1. To provide our Service</h3>
+
+                <p>
+                    This includes allowing you to create an account, publish
+                    advertisements, communicate with other users and access
+                    features of MarketHub.
+                </p>
+
+                <h3>4.2. To enable secure access</h3>
+
+                <p>
+                    We may process information to verify accounts, protect
+                    users and maintain the security of the Service.
+                </p>
+
+                <h3>4.3. To customize your experience</h3>
+
+                <p>
+                    We may use information to personalize content and improve
+                    the relevance of the Service.
+                </p>
+
+                <h3>4.4. Customer support</h3>
+
+                <p>
+                    We may process your information when responding to support
+                    requests, technical problems or other communications.
+                </p>
+
+                <h3>4.5. Communication</h3>
+
+                <p>
+                    We may communicate with you through email, notifications,
+                    messages or other available communication channels.
+                </p>
+
+                <h3>4.6. Research and improvement</h3>
+
+                <p>
+                    We may analyze how users interact with MarketHub in order
+                    to improve existing features and develop new services.
+                </p>
+
+                <h3>4.7. Marketing communications</h3>
+
+                <p>
+                    Where permitted by law, we may send information about
+                    MarketHub products, services, promotions and offers.
+                </p>
+
+                <h3>4.8. Advertising</h3>
+
+                <p>
+                    We may use information to provide more relevant advertising
+                    and measure advertising performance, subject to applicable
+                    law and available user choices.
+                </p>
+
+                <h3>4.9. Security and fraud prevention</h3>
+
+                <p>
+                    We may process information to detect, prevent and investigate
+                    fraud, abuse, unauthorized activity and violations of our
+                    Terms of Use.
+                </p>
+
+                <h3>4.10. Legal compliance</h3>
+
+                <p>
+                    We may process or disclose information where required or
+                    permitted by applicable law.
+                </p>
+
+                <h3>4.11. Payments</h3>
+
+                <p>
+                    We may use third-party payment providers to process
+                    transactions for paid products or services.
+                </p>
+
+            </section>
+
+
+            <!-- 5 -->
+
+            <section id="section5">
+
+                <h2>
+                    5. UNDER WHAT LEGAL BASES WE PROCESS YOUR PERSONAL DATA
+                </h2>
+
+                <p>
+                    Depending on the circumstances, MarketHub may process
+                    personal data on the following legal bases:
+                </p>
+
+                <h3>5.1. Your consent</h3>
+
+                <p>
+                    Where required, we may process your personal data based
+                    on your consent.
+                </p>
+
+                <h3>5.2. Performance of a contract</h3>
+
+                <p>
+                    Processing may be necessary to provide the Service and
+                    perform our agreement with you.
+                </p>
+
+                <h3>5.3. Legitimate interests</h3>
+
+                <p>
+                    We may process information where necessary for legitimate
+                    interests, including improving the Service, preventing
+                    fraud, communicating with users and protecting our rights.
+                </p>
+
+                <h3>5.4. Legal obligations</h3>
+
+                <p>
+                    We may process personal data when required to comply with
+                    applicable legal obligations.
+                </p>
+
+            </section>
+
+
+            <!-- 6 -->
+
+            <section id="section6">
+
+                <h2>
+                    6. WITH WHOM WE SHARE YOUR PERSONAL DATA
+                </h2>
+
+                <p>
+                    We may share information with third parties that help us
+                    operate, provide, improve, secure or support the Service.
+                </p>
+
+                <h3>6.1. Service providers</h3>
+
+                <p>
+                    Depending on the services you use, these may include:
+                </p>
+
+                <ul>
+                    <li>Cloud hosting providers</li>
+                    <li>Analytics providers</li>
+                    <li>Authentication providers</li>
+                    <li>Marketing service providers</li>
+                    <li>Email delivery providers</li>
+                    <li>Payment service providers</li>
+                    <li>Security and fraud-prevention providers</li>
+                    <li>Technical support providers</li>
+                </ul>
+
+
+                <h3>
+                    6.2. Law enforcement and public authorities
+                </h3>
+
+                <p>
+                    We may disclose personal data when required by law or when
+                    reasonably necessary to protect our rights, users, property
+                    or the security of the Service.
+                </p>
+
+
+                <h3>
+                    6.3. Corporate transactions
+                </h3>
+
+                <p>
+                    If MarketHub is involved in a merger, acquisition,
+                    restructuring, sale of assets or similar transaction,
+                    personal data may be transferred as part of that transaction
+                    where legally permitted.
+                </p>
+
+            </section>
+
+
+            <!-- 7 -->
+
+            <section id="section7">
+
+                <h2>7. AVAILABLE REMEDIES</h2>
+
+                <p>
+                    If a personal-data breach occurs, MarketHub will take
+                    appropriate steps required by applicable data protection
+                    law, including notifying relevant authorities or affected
+                    individuals where notification is legally required.
+                </p>
+
+                <p>
+                    You may also have the right to lodge a complaint with the
+                    relevant data protection supervisory authority or seek
+                    appropriate legal remedies.
+                </p>
+
+            </section>
+
+
+            <!-- 8 -->
+
+            <section id="section8">
+
+                <h2>8. NO LIMITATION CLAUSE</h2>
+
+                <p>
+                    Nothing in this Privacy Policy is intended to exclude or
+                    limit liability where such exclusion or limitation is
+                    prohibited by applicable law.
+                </p>
+
+            </section>
+
+
+            <!-- 9 -->
+
+            <section id="section9">
+
+                <h2>
+                    9. HOW YOU CAN EXERCISE YOUR PRIVACY RIGHTS
+                </h2>
+
+                <p>
+                    Depending on applicable law, you may have rights regarding
+                    your personal data, including:
+                </p>
+
+                <h3>Accessing and correcting your data</h3>
+
+                <p>
+                    You may request access to personal information held about
+                    you and ask us to correct inaccurate information.
+                </p>
+
+                <h3>Deleting your personal data</h3>
+
+                <p>
+                    You may request that your personal data be deleted, subject
+                    to legal requirements that may require us to retain certain
+                    information.
+                </p>
+
+                <h3>Restricting or objecting to processing</h3>
+
+                <p>
+                    Where applicable, you may request that we restrict or stop
+                    certain processing of your personal data.
+                </p>
+
+                <h3>Data portability</h3>
+
+                <p>
+                    Where applicable, you may have the right to receive your
+                    personal data in a structured and commonly used format.
+                </p>
+
+                <h3>Withdrawing consent</h3>
+
+                <p>
+                    Where processing is based on consent, you may withdraw your
+                    consent at any time. Withdrawal does not affect processing
+                    that occurred before the withdrawal.
+                </p>
+
+                <p>
+                    To exercise your privacy rights, contact the MarketHub
+                    support team through the contact information provided below.
+                </p>
+
+            </section>
+
+
+            <!-- 10 -->
+
+            <section id="section10">
+
+                <h2>10. AGE LIMITATION</h2>
+
+                <p>
+                    MarketHub does not knowingly collect personal data from
+                    children where doing so is prohibited by applicable law.
+                </p>
+
+                <p>
+                    If you believe that a child has provided personal data to
+                    MarketHub in circumstances where such collection is not
+                    permitted, please contact us so that appropriate action
+                    can be taken.
+                </p>
+
+            </section>
+
+
+            <!-- 11 -->
+
+            <section id="section11">
+
+                <h2>11. INTERNATIONAL DATA TRANSFERS</h2>
+
+                <p>
+                    Some of our service providers may process personal data
+                    outside Nigeria or outside the country where your data was
+                    originally collected.
+                </p>
+
+                <p>
+                    Where personal data is transferred internationally,
+                    MarketHub will take appropriate measures required by
+                    applicable data protection laws.
+                </p>
+
+            </section>
+
+
+            <!-- 12 -->
+
+            <section id="section12">
+
+                <h2>12. CHANGES TO THIS PRIVACY POLICY</h2>
+
+                <p>
+                    We may update this Privacy Policy from time to time.
+                    If material changes are made, we may notify you through
+                    the Service or other appropriate communication channels.
+                </p>
+
+                <p>
+                    Your continued use of the Service after an updated Privacy
+                    Policy becomes effective means that you acknowledge the
+                    revised policy.
+                </p>
+
+            </section>
+
+
+            <!-- 13 -->
+
+            <section id="section13">
+
+                <h2>13. DATA RETENTION</h2>
+
+                <p>
+                    We retain personal data for as long as reasonably necessary
+                    to provide the Service, fulfill the purposes described in
+                    this Privacy Policy, comply with legal obligations, resolve
+                    disputes and enforce our agreements.
+                </p>
+
+                <p>
+                    When personal data is no longer required, we may delete,
+                    anonymize or otherwise securely dispose of it in accordance
+                    with applicable law.
+                </p>
+
+            </section>
+
+
+            <!-- 14 -->
+
+            <section id="section14">
+
+                <h2>14. CONTACT US</h2>
+
+                <p>
+                    If you have questions about this Privacy Policy, your
+                    account or the way MarketHub processes your personal data,
+                    please contact us through:
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <a href="mailto:support@markethub.ng">
+                        support@markethub.ng
+                    </a>
+                </p>
+
+                <p>
+                    <strong>Website:</strong>
+                    MarketHub
+                </p>
+
+            </section>
+
+
+            <div class="privacy-updated">
+                Effective as of: 25 September 2026
+            </div>
+
+        </div>
+
+    </main>
+</main>
+
+
+<!-- ================= FOOTER ================ -->
+
+<div class="footer-img" style=" height: 95px; background-color: #152b3e; mask-image: url('https://assets.jijistatic.net/static/svg/footer/footer-nigeria-new.svg'); mask-size: contain; mask-repeat: no-repeat; mask-position: center; "></div>
+
+
+<!-- Footer -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- About MarketHub -->
+    <div class="footer-column">
+      <h4>About MarketHub</h4>
+
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="rules.html">Terms & Conditions</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="safety.html">Safety Policy</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+
+    <!-- Support -->
+    <div class="footer-column">
+      <h4>Support</h4>
+
+      <a href="help.html">Help & Support</a>
+      <a href="safety.html">Safety Tips</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+
+    <!-- Our Apps -->
+    <div class="footer-column">
+      <h4>Our Apps</h4>
+
+      <a href="https://www.apple.com/app-store/" class="app-button">
+        <i class="fa-brands fa-apple"></i>
+
+        <span>
+          <small>Download on the</small>
+          App Store
+        </span>
+      </a>
+
+      <a href="https://play.google.com/store/apps?hl=en" class="app-button">
+        <i class="fa-brands fa-google-play"></i>
+
+        <span>
+          <small>GET IT ON</small>
+          Google Play
+        </span>
+      </a>
+    </div>
+
+
+    <!-- Our Resources -->
+    <div class="footer-column">
+      <h4>Our Resources</h4>
+
+      <a href="https://web.facebook.com/?_rdc=1&_rdr#">MarketHub on Facebook</a>
+      <a href="https://www.instagram.com/mazitundeednut/">Our Instagram</a>
+      <a href="https://www.youtube.com/">Our YouTube</a>
+      <a href="https://x.com/home">Our X</a>
+    </div>
+
+
+    <!-- Hot Links -->
+    <div class="footer-column">
+      <h4>Hot Links</h4>
+
+      <a href="#">Categories</a>
+      <a href="post-ad.html">Post an Ad</a>
+      <a href="#">Popular Products</a>
+      <a href="#">MarketHub Blog</a>
+    </div>
+
+  </div>
+
+
+  <!-- MarketHub Brand -->
+  <div class="footer-brand">
+
+    <a href="index.html" class="brand">
+
+      <span class="brand-bag">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </span>
+
+      <span class="brand-name">
+        Market<span>Hub</span>
+      </span>
+
+    </a>
+
+    <p>Buy. Sell. Connect.</p>
+
+  </div>
+
+
+  <!-- Social Media -->
+  <div class="socials">
+
+    <a href="https://web.facebook.com/?_rdc=1&_rdr#">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="https://x.com/home">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+
+    <a href="https://www.instagram.com/mazitundeednut/">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://www.youtube.com/">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+
+  </div>
+
+
+  <!-- Country Flags -->
+  <div class="countries">
+
+    <img src="https://flagcdn.com/w40/ng.png" alt="Nigeria">
+    <img src="https://flagcdn.com/w40/gh.png" alt="Ghana">
+    <img src="https://flagcdn.com/w40/ke.png" alt="Kenya">
+    <img src="https://flagcdn.com/w40/ug.png" alt="Uganda">
+    <img src="https://flagcdn.com/w40/za.png" alt="South Africa">
+    <img src="https://flagcdn.com/w40/tz.png" alt="Tanzania">
+    <img src="https://flagcdn.com/w40/rw.png" alt="Rwanda">
+    <img src="https://flagcdn.com/w40/sn.png" alt="Senegal">
+    <img src="https://flagcdn.com/w40/et.png" alt="Ethiopia">
+    <img src="https://flagcdn.com/w40/eg.png" alt="Egypt">
+
+  </div>
+
+
+  <!-- Copyright -->
+  <p class="copyright">
+    © 2026 MarketHub. All rights reserved.
+  </p>
+
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+
+<script src="main.js"></script>
+
+
+</body>
+
+</html>

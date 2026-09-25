@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart, Messages & Admin Chat</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f7f8fa;
+      padding-bottom: 40px;
+    }
+
+    /* ===== Top Bar ===== */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .icon-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 16px;
+      color: #333;
+      transition: background 0.2s;
+    }
+    .icon-btn:hover { background: #f2f2f2; }
+    .icon-btn b { font-size: 12px; font-weight: 600; color: #666; }
+    .icon-btn.active i { color: #e0245e; }
+
+    @keyframes bump {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); color: #e0245e; }
+      100% { transform: scale(1); }
+    }
+    .icon-btn.bump b { animation: bump 0.35s ease; }
+
+    /* ===== Posts Grid ===== */
+    .posts-grid {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== Post Card ===== */
+    .post-card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    .post-image-wrap { position: relative; }
+    .post-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    /* Floating "Message Admin" button on the image */
+    .img-msg-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .img-msg-btn:hover {
+      background: #4a90e2;
+      transform: translateY(-2px);
+    }
+
+    .post-body {
+      padding: 14px 16px 6px;
+      flex: 1;
+    }
+    .post-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+    .post-desc {
+      margin: 0;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* ===== Post actions (like + message) ===== */
+    .post-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 16px 14px;
+      border-top: 1px solid #f2f2f2;
+    }
+    .post-like-btn,
+    .post-msg-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #555;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .post-like-btn:hover { background: #fdf2f6; }
+    .post-like-btn.liked { color: #e0245e; }
+    .post-like-btn.liked i { font-weight: 900; }
+
+    .post-msg-btn { color: #4a90e2; }
+    .post-msg-btn:hover { background: #eaf3ff; }
+
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+    .post-like-btn.pop i { animation: pop 0.4s ease; }
+
+    /* ===== Messages Page ===== */
+    .messages-page {
+      position: fixed;
+      inset: 0;
+      background: #f0f2f5;
+      display: none;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+    }
+    .messages-page.open { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg-header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 12px;
+    }
+    .msg-header h2 { margin: 0; font-size: 18px; }
+    .msg-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #555;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .msg-close:hover { background: #f2f2f2; }
+
+    .msg-body {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding-top: 60px;
+    }
+
+    .msg-list {
+      width: 340px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .msg-list-header {
+      padding: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #555;
+    }
+    .conversation {
+      display: flex;
+      gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #f5f5f5;
+      transition: background 0.15s;
+    }
+    .conversation:hover { background: #f7f9fc; }
+    .conversation.active { background: #eaf3ff; }
+    .conversation .avatar {
+      width: 44px;
+      height: 44px;
+      font-size: 14px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .conversation-info { flex: 1; min-width: 0; }
+    .conversation-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .conversation-top strong { font-size: 14px; }
+    .conversation-top .time { font-size: 11px; color: #999; }
+    .conversation-preview {
+      font-size: 13px;
+      color: #777;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .unread-dot {
+      width: 8px;
+      height: 8px;
+      background: #4a90e2;
+      border-radius: 50%;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    /* Admin avatar badge */
+    .avatar.admin { background: #4a90e2; position: relative; }
+    .avatar.admin::after {
+      content: "\f3ed";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      bottom: -2px; right: -2px;
+      background: #22c55e;
+      color: #fff;
+      font-size: 9px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+    }
+
+    .msg-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f7f8fa;
+      min-width: 0;
+    }
+    .chat-header {
+      padding: 14px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-header .avatar {
+      width: 36px;
+      height: 36px;
+      font-size: 12px;
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .chat-header strong { font-size: 15px; }
+    .chat-header .status { font-size: 12px; color: #22c55e; }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bubble {
+      max-width: 60%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    .bubble.them {
+      background: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .bubble.me {
+      background: #4a90e2;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .bubble .meta {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Property reference chip inside chat */
+    .property-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #eef4fb;
+      border: 1px solid #d7e5f5;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #2c5c94;
+      margin-bottom: 6px;
+      align-self: flex-start;
+      max-width: 90%;
+    }
+    .property-chip img {
+      width: 40px; height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .property-chip .chip-text { line-height: 1.2; }
+    .property-chip strong { display: block; font-size: 13px; color: #1a3f68; }
+
+    .chat-input {
+      padding: 12px 16px;
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 22px;
+      outline: none;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .chat-input input:focus { border-color: #4a90e2; }
+    .chat-input button {
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .chat-input button:hover { background: #357abd; }
+
+    .chat-empty {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+      padding: 20px;
+    }
+    .chat-empty i { font-size: 42px; color: #ccc; }
+
+    @media (max-width: 720px) {
+      .msg-list { width: 100%; }
+      .msg-chat { display: none; }
+      .msg-body.show-chat .msg-list { display: none; }
+      .msg-body.show-chat .msg-chat { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Top Bar ===== -->
+  <div class="top-bar">
+    <button class="icon-btn" id="likeBtn">
+      <i class="fa-regular fa-heart"></i><b id="likeCount">0</b>
+    </button>
+
+    <button class="icon-btn" id="messageBtn">
+      <i class="fa-brands fa-discourse"></i><b id="msgCount">3</b>
+    </button>
+  </div>
+
+  <!-- ===== Posts Grid ===== -->
+  <div class="posts-grid" id="postsGrid">
+
+    <!-- Post 1 -->
+    <div class="post-card"
+          data-title="Modern 2-Bedroom Apartment"
+         data-location="Lekki Phase 1, Lagos"
+         data-price="₦2,500,000 / year"
+         data-image="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80" alt="Modern apartment">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Modern 2-Bedroom Apartment</h3>
+        <p class="post-desc">Lekki Phase 1, Lagos • ₦2,500,000 / year</p>
+      </div>  -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card"
+         data-title="Luxury 4-Bedroom Villa"
+         data-location="Ikoyi, Lagos"
+         data-price="₦15,000,000 / year"
+         data-image="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Luxury villa">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Luxury 4-Bedroom Villa</h3>
+        <p class="post-desc">Ikoyi, Lagos • ₦15,000,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post-card"
+         data-title="Cozy Family Home"
+         data-location="Ajah, Lagos"
+         data-price="₦3,200,000 / year"
+         data-image="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80" alt="Family house">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Cozy Family Home</h3>
+        <p class="post-desc">Ajah, Lagos • ₦3,200,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post-card"
+         data-title="Contemporary Bungalow"
+         data-location="Gbagada, Lagos"
+         data-price="₦2,000,000 / year"
+         data-image="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Modern bungalow">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Contemporary Bungalow</h3>
+        <p class="post-desc">Gbagada, Lagos • ₦2,000,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="post-card"
+         data-title="Penthouse with Ocean View"
+         data-location="Victoria Island, Lagos"
+         data-price="₦20,000,000 / year"
+         data-image="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" alt="Penthouse">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Penthouse with Ocean View</h3>
+        <p class="post-desc">Victoria Island, Lagos • ₦20,000,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="post-card"
+         data-title="Suburban Duplex"
+         data-location="Ikeja GRA, Lagos"
+         data-price="₦5,500,000 / year"
+         data-image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" alt="Suburban house">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Suburban Duplex</h3>
+        <p class="post-desc">Ikeja GRA, Lagos • ₦5,500,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+
+
+    <div class="post-card"
+         data-title="Suburban Duplex"
+         data-location="Ikeja GRA, Lagos"
+         data-price="₦5,500,000 / year"
+         data-image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" alt="Suburban house">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Suburban Duplex</h3>
+        <p class="post-desc">Ikeja GRA, Lagos • ₦5,500,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+
+
+
+    <div class="post-card"
+         data-title="Suburban Duplex"
+         data-location="Ikeja GRA, Lagos"
+         data-price="₦5,500,000 / year"
+         data-image="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80">
+      <!-- <div class="post-image-wrap">
+        <img class="post-image" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" alt="Suburban house">
+        <button class="img-msg-btn"><i class="fa-solid fa-comment-dots"></i> Message Admin</button>
+      </div>
+      <div class="post-body">
+        <h3 class="post-title">Suburban Duplex</h3>
+        <p class="post-desc">Ikeja GRA, Lagos • ₦5,500,000 / year</p>
+      </div> -->
+      <div class="post-actions">
+        <button class="post-like-btn">
+          <i class="fa-regular fa-heart"></i>
+          <span class="post-like-count">0</span> Likes
+        </button>
+        <button class="post-msg-btn"><i class="fa-regular fa-comment"></i> Message Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MESSAGES PAGE ===== -->
+  <div class="messages-page" id="messagesPage">
+    <div class="msg-header">
+      <button class="msg-close" id="msgClose" title="Back">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <h2>Messages</h2>
+    </div>
+
+    <div class="msg-body" id="msgBody">
+      <aside class="msg-list" id="msgList">
+        <div class="msg-list-header">Inbox</div>
+
+        <div class="conversation active"
+             data-user="Admin"
+             data-avatar="AD"
+             data-admin="true"
+             data-initial-msg="Hi John 👋 How can I help you today?">
+          <span class="avatar admin">AD</span>
+          <div class="conversation-info">
+            <div class="conversation-top">
+              <strong>styem  updates</strong>
+              <span class="time">Now</span>
+            </div>
+            <div class="conversation-preview">Hi John 👋 How can I help you today?</div>
+          </div>
+        </div>
+
+
+        
+
+        <div class="conversation"
+             data-user="Grace Okafor"
+             data-avatar="GO"
+             data-initial-msg="Can we schedule a viewing this weekend?">
+          <span class="avatar" style="background:#f59e0b;">GO</span>
+          <div class="conversation-info">
+            <div class="conversation-top">
+              <strong>Grace Okafor</strong>
+              <span class="time">Yesterday</span>
+            </div>
+            <div class="conversation-preview">Can we schedule a viewing this weekend?</div>
+          </div>
+          <span class="unread-dot"></span>
+        </div>
+      </aside>
+
+      <section class="msg-chat" id="msgChat">
+        <div class="chat-empty" id="chatEmpty">
+          <i class="fa-regular fa-comments"></i>
+          Select a conversation to start chatting
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    /* ============================================
+       HEART COUNTERS
+       ============================================ */
+    const topLikeBtn   = document.getElementById('likeBtn');
+    const topLikeIcon  = topLikeBtn.querySelector('i');
+    const topLikeCount = document.getElementById('likeCount');
+
+    let totalLikes = 0;
+
+    document.querySelectorAll('.post-card').forEach(card => {
+      const btn   = card.querySelector('.post-like-btn');
+      const icon  = btn.querySelector('i');
+      const count = btn.querySelector('.post-like-count');
+      let cardLikes = 0;
+      let liked = false;
+
+      btn.addEventListener('click', () => {
+        liked = !liked;
+        cardLikes = liked ? cardLikes + 1 : Math.max(0, cardLikes - 1);
+        totalLikes += liked ? 1 : -1;
+        if (totalLikes < 0) totalLikes = 0;
+
+        icon.className = liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+        count.textContent = cardLikes;
+        btn.classList.toggle('liked', liked);
+
+        topLikeCount.textContent = totalLikes;
+        topLikeIcon.className = totalLikes > 0 ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+        topLikeBtn.classList.toggle('active', totalLikes > 0);
+
+        if (liked) {
+          btn.classList.remove('pop');
+          void btn.offsetWidth;
+          btn.classList.add('pop');
+
+          topLikeBtn.classList.remove('bump');
+          void topLikeBtn.offsetWidth;
+          topLikeBtn.classList.add('bump');
+        }
+      });
+    });
+
+    /* ============================================
+       MESSAGES PAGE
+       ============================================ */
+    const messageBtn   = document.getElementById('messageBtn');
+    const messagesPage = document.getElementById('messagesPage');
+    const msgClose     = document.getElementById('msgClose');
+    const msgBody      = document.getElementById('msgBody');
+    const msgChat      = document.getElementById('msgChat');
+    const msgList      = document.getElementById('msgList');
+
+    messageBtn.addEventListener('click', () => {
+      messagesPage.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    msgClose.addEventListener('click', () => {
+      messagesPage.classList.remove('open');
+      msgBody.classList.remove('show-chat');
+      document.body.style.overflow = '';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && messagesPage.classList.contains('open')) {
+        msgClose.click();
+      }
+    });
+
+    // Existing conversation clicks
+    msgList.addEventListener('click', (e) => {
+      const conv = e.target.closest('.conversation');
+      if (!conv) return;
+
+      msgList.querySelectorAll('.conversation').forEach(c => c.classList.remove('active'));
+      conv.classList.add('active');
+
+      const dot = conv.querySelector('.unread-dot');
+      if (dot) dot.remove();
+
+      openConversation({
+        user:       conv.dataset.user,
+        avatar:     conv.dataset.avatar,
+        initialMsg: conv.dataset.initialMsg,
+        isAdmin:    conv.dataset.admin === 'true'
+      });
+
+      msgBody.classList.add('show-chat');
+    });
+
+    // "Message Admin" buttons on each card
+    document.querySelectorAll('.post-card').forEach(card => {
+      const msgButtons = card.querySelectorAll('.img-msg-btn, .post-msg-btn');
+      msgButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const data = {
+            title:    card.dataset.title,
+            location: card.dataset.location,
+            price:    card.dataset.price,
+            image:    card.dataset.image
+          };
+          startAdminChat(data);
+        });
+      });
+    });
+
+    /**
+     * Open the Messages page in a new conversation with Admin,
+     * pre-filled with a reference to the property the user clicked.
+     */
+    function startAdminChat(property) {
+      // Open the page
+      messagesPage.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      // Make sure the Admin conversation exists (or reuse it)
+      let adminConv = msgList.querySelector('.conversation[data-admin="true"]');
+      if (!adminConv) {
+        adminConv = document.createElement('div');
+        adminConv.className = 'conversation';
+        adminConv.dataset.user   = 'Admin';
+        adminConv.dataset.avatar = 'AD';
+        adminConv.dataset.admin  = 'true';
+        adminConv.dataset.initialMsg = 'Hi 👋 How can I help you today?';
+        adminConv.innerHTML = `
+          <span class="avatar admin">AD</span>
+          <div class="conversation-info">
+            <div class="conversation-top">
+              <strong>Admin</strong>
+              <span class="time">Now</span>
+            </div>
+            <div class="conversation-preview">Hi 👋 How can I help you today?</div>
+          </div>
+        `;
+        msgList.appendChild(adminConv);
+      }
+
+      // Highlight it
+      msgList.querySelectorAll('.conversation').forEach(c => c.classList.remove('active'));
+      adminConv.classList.add('active');
+
+      // Update preview to show the property
+      adminConv.querySelector('.conversation-preview').textContent =
+        `About: ${property.title}`;
+
+      // Render chat with property chip
+      renderAdminChat(property);
+
+      msgBody.classList.add('show-chat');
+    }
+
+    function renderAdminChat(property) {
+      msgChat.innerHTML = `
+        <div class="chat-header">
+          <span class="avatar admin">AD</span>
+          <div>
+            <strong>Admin</strong>
+            <div class="status">● Online</div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="bubble them">
+            Hi John 👋 How can I help you today?
+            <span class="meta">Just now</span>
+          </div>
+          <div class="property-chip">
+            <img src="${property.image}" alt="${property.title}">
+            <div class="chip-text">
+              <strong>${property.title}</strong>
+              ${property.location} • ${property.price}
+            </div>
+          </div>
+          <div class="bubble them">
+            I see you're interested in <strong>${property.title}</strong>. Would you like to schedule a viewing?
+            <span class="meta">Just now</span>
+          </div>
+        </div>
+        <form class="chat-input" id="chatForm">
+          <input type="text" placeholder="Message Admin..." autocomplete="off" required>
+          <button type="submit" title="Send">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      `;
+      wireChatForm();
+    }
+
+    function openConversation({ user, avatar, initialMsg, isAdmin }) {
+      msgChat.innerHTML = `
+        <div class="chat-header">
+          <span class="avatar ${isAdmin ? 'admin' : ''}"
+                style="${isAdmin ? '' : 'background:#4a90e2;'}">${avatar}</span>
+          <div>
+            <strong>${user}</strong>
+            <div class="status">● Online</div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="bubble them">
+            ${initialMsg}
+            <span class="meta">Just now</span>
+          </div>
+        </div>
+        <form class="chat-input" id="chatForm">
+          <input type="text" placeholder="Type a message..." autocomplete="off" required>
+          <button type="submit" title="Send">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      `;
+      wireChatForm();
+    }
+
+    function wireChatForm() {
+      const form     = document.getElementById('chatForm');
+      const input    = form.querySelector('input');
+      const messages = document.getElementById('chatMessages');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble me';
+        bubble.innerHTML = `${escapeHtml(text)}<span class="meta">${timeNow()}</span>`;
+        messages.appendChild(bubble);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+
+        // Auto-reply
+        setTimeout(() => {
+          const reply = document.createElement('div');
+          reply.className = 'bubble them';
+          reply.innerHTML = `Thanks for your message! I'll get back to you shortly.<span class="meta">${timeNow()}</span>`;
+          messages.appendChild(reply);
+          messages.scrollTop = messages.scrollHeight;
+        }, 900);
+      });
+
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function timeNow() {
+      return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+  </script>
+
+</body>
+</html>
