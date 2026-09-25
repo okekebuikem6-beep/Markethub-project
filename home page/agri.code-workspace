@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../pro-folder"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "pro-folder"
+	}
+}
