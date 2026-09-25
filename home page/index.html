@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketHub - Buy and Sell Anything</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981', // Emerald 500
+                        dark: '#111827',    // Gray 900
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom styles for smooth transitions */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-50 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="text-white p-2 rounded-lg">
+                       <img src="../pictures/favicon.jpg" alt="" class="w-12">
+                    </div>
+                    <span class="text-2xl font-bold text-dark">Market<span class="text-primary">Hub</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-primary font-medium border-b-2 border-primary pb-1">Home</a>
+                    <div class="relative group">
+                        <button class="text-gray-600 hover:text-primary font-medium flex items-center gap-1">
+                            Categories <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <!-- Dropdown -->
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden group-hover:block border border-gray-100">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Electronics</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Vehicles</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Fashion</a>
+                        </div>
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-primary font-medium">Post an Ad</a>
+                    <a href="#" class="text-gray-600 hover:text-primary font-medium">Help</a>
+                </div>
+
+                <!-- Right Side Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="#" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 transition">Login</a>
+                    <a href="#" class="px-4 py-2 border border-primary text-primary rounded-md font-medium hover:bg-green-50 transition">Register</a>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-md font-medium hover:bg-green-600 transition flex items-center gap-2">
+                        <i class="fas fa-plus-circle"></i> Post an Ad
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Categories</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Post an Ad</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Help</a>
+                <div class="border-t my-2"></div>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Login</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-gray-50">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg relative h-[600px] flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-white space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                        Buy and Sell <br>
+                        <span class="text-primary">Anything, Anywhere</span>
+                    </h1>
+                    <p class="text-lg text-gray-200 max-w-lg">
+                        Find great deals, post your products and connect with buyers and sellers in your area.
+                    </p>
+
+                    <!-- Search Bar -->
+                    <div class="bg-white rounded-lg p-2 flex flex-col md:flex-row shadow-xl max-w-2xl">
+                        <div class="flex-grow flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-gray-200">
+                            <i class="fas fa-search text-gray-400 mr-2"></i>
+                            <input type="text" placeholder="Search for products, categories or location..." class="w-full outline-none text-gray-700 placeholder-gray-400">
+                        </div>
+                        <div class="px-4 py-2 border-b md:border-b-0 md:border-r border-gray-200 flex items-center">
+                            <select class="outline-none text-gray-700 bg-transparent cursor-pointer w-full md:w-auto">
+                                <option>All Categories</option>
+                                <option>Electronics</option>
+                                <option>Vehicles</option>
+                                <option>Fashion</option>
+                            </select>
+                        </div>
+                        <button class="bg-primary hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-md transition duration-300 w-full md:w-auto mt-2 md:mt-0">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Image / Right Side Text -->
+                <div class="hidden lg:block relative h-full">
+                    <!-- The image is handled by the background, but we add the overlay text here -->
+                    <div class="absolute bottom-20 right-0 text-right transform rotate-[-5deg]">
+                        <p class="text-white font-bold text-3xl font-serif italic" style="font-family: 'Brush Script MT', cursive;">
+                            Great Deals <br> Are Just a <br> Click Away!
+                        </p>
+                        <div class="w-full h-1 bg-primary mt-2 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-10 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            <!-- Category Card 1 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-green-100 text-primary rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-mobile-alt text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Electronics</h3>
+            </div>
+            <!-- Category Card 2 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-car text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Vehicles</h3>
+            </div>
+            <!-- Category Card 3 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-tshirt text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Fashion</h3>
+            </div>
+            <!-- Category Card 4 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-home text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Property</h3>
+            </div>
+            <!-- Category Card 5 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-tablet-alt text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Phones & Tablets</h3>
+            </div>
+            <!-- Category Card 6 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-couch text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Home & Furniture</h3>
+            </div>
+            <!-- Category Card 7 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-briefcase text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">Jobs & Services</h3>
+            </div>
+            <!-- Category Card 8 -->
+            <div class="category-card bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer transition duration-300 border border-gray-100">
+                <div class="w-12 h-12 mx-auto bg-gray-200 text-gray-600 rounded-full flex items-center justify-center mb-3">
+                    <i class="fas fa-ellipsis-h text-xl"></i>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-800">More Categories</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-16">
+        <div class="flex justify-between items-end mb-6">
+            <h2 class="text-2xl font-bold text-dark">Featured Listings</h2>
+            <a href="#" class="text-primary font-semibold hover:underline flex items-center gap-1">
+                View All <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+            
+            <!-- Listing 1: iPhone -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="iPhone" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">iPhone 13 128GB</h3>
+                    <p class="text-primary font-bold mt-1">₦350,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Lagos</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">David Tech</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listing 2: Toyota -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Toyota" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">Toyota Corolla 2016</h3>
+                    <p class="text-primary font-bold mt-1">₦4,500,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Abuja</span>
+                        <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">Blessed Motors</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listing 3: Sofa -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sofa" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">Modern Sofa</h3>
+                    <p class="text-primary font-bold mt-1">₦120,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Port Harcourt</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=33" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">Home Essentials</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listing 4: Sneakers -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sneakers" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">Men's Sneakers</h3>
+                    <p class="text-primary font-bold mt-1">₦60,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Lagos</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-medium">New</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=60" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">Fashion World</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listing 5: HP Laptop -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Laptop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">HP Laptop</h3>
+                    <p class="text-primary font-bold mt-1">₦200,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Abuja</span>
+                        <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=68" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">Tech World</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listing 6: Honda Bike -->
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 overflow-hidden group border border-gray-100">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bike" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <button class="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full text-gray-600 hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 truncate">Honda CBR 250R</h3>
+                    <p class="text-primary font-bold mt-1">₦1,800,000</p>
+                    <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt"></i> Port Harcourt</span>
+                        <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-medium">Used</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
+                        <img src="https://i.pravatar.cc/150?img=17" alt="User" class="w-6 h-6 rounded-full">
+                        <span class="text-xs text-gray-600">RideZone</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-400 ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1: Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="bg-primary text-white p-1.5 rounded-lg">
+                            <i class="fas fa-shopping-bag text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Market<span class="text-primary">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Buy. Sell. Connect.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition"><i class="fab fa-twitter text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition"><i class="fab fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition"><i class="fab fa-youtube text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Categories</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Post an Ad</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Help & Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: About Us -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About Us</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-primary transition">About MarketHub</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get the latest products and deals.</p>
+                    <form class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="Enter your email address" class="w-full px-4 py-2 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button type="submit" class="bg-primary hover:bg-green-600 text-white px-4 py-2 rounded-md font-medium transition whitespace-nowrap">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 MarketHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
