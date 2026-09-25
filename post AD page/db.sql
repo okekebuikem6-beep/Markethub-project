@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS markethub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE markethub;
+
+CREATE TABLE IF NOT EXISTS advertisements (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(120) NOT NULL,
+  category VARCHAR(80) NOT NULL,
+  price DECIMAL(12,2) NOT NULL,
+  item_condition VARCHAR(50) NOT NULL,
+  location VARCHAR(150) NOT NULL,
+  description TEXT NOT NULL,
+  status ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS advertisement_images (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  advertisement_id BIGINT UNSIGNED NOT NULL,
+  image_path VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_ad_images_ad FOREIGN KEY (advertisement_id) REFERENCES advertisements(id) ON DELETE CASCADE
+);
